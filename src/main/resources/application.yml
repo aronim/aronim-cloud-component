@@ -1,0 +1,12 @@
+info:
+  app:
+    name: KdcCloudComponentService
+    description: KungfuDev Cloud Component Service
+    version: 1.0-SNAPSHOT
+
+spring:
+  application:
+    name: kungfudev-cloud-component
+
+server:
+  port: 0

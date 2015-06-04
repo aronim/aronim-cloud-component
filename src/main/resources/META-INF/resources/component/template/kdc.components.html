@@ -1,0 +1,24 @@
+<table class="table table-condensed">
+
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Instance ID</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody ng-repeat="component in components">
+    <tr>
+        <td>{{component.name}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>{{component.instance.metadata.instanceId}}</td>
+        <td>
+            <button class="btn btn-sm btn-warning" ng-click="restart(component.instance)">Restart</button>
+            <button class="btn btn-sm btn-danger" ng-click="shutdown(component.instance)">Shutdown</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
