@@ -6,7 +6,7 @@ info:
 
 spring:
   application:
-    name: kungfudev-cloud-component
+    name: kdc-component
 
 server:
   port: 0
