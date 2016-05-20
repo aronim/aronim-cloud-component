@@ -20,7 +20,7 @@ apply plugin: "spring-boot"
 
 // Properties
 
-group = "com.kungfudev.cloud"
+group = "com.aronim.cloud"
 version = "1.0-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -43,7 +43,8 @@ repositories {
 
 dependencies {
 
-    compile("com.kungfudev.cloud:kungfudev-cloud-common:1.0-SNAPSHOT")
+//    compile("com.aronim.cloud:aronim-cloud-common:1.0-SNAPSHOT")
+    compile project(":aronim-cloud-common")
 
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")

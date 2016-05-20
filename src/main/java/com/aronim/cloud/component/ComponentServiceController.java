@@ -1,5 +1,5 @@
 
-package com.kungfudev.cloud.component;
+package com.aronim.cloud.component;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;

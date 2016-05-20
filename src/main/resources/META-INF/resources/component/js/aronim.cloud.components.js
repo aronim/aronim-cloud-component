@@ -3,14 +3,14 @@
 
     define(["jquery",
             "angular",
-            "common/js/kdc.common",
-            "text!component/template/kdc.components.html"],
+            "common/js/aronim.cloud.common",
+            "text!component/template/aronim.cloud.components.html"],
 
         function ($, angular, kdc, kdcComponentsTemplate) {
 
-            var module = angular.module("kdc.components", []);
+            var module = angular.module("aronim.cloud.components", []);
 
-            module.factory("kdcComponentsService",
+            module.factory("aronimCloudComponentsService",
                 function ($q, $http) {
 
                     return {
@@ -63,7 +63,7 @@
                 }
             );
 
-            module.directive("kdcComponents",
+            module.directive("aronimCloudComponents",
                 function ($window, $log, kdcComponentsService) {
 
                     return {
