@@ -12,12 +12,12 @@
     <tr>
         <td>{{component.name}}</td>
     </tr>
-    <tr>
+    <tr ng-repeat="instance in component.instance">
         <td></td>
-        <td>{{component.instance.metadata.instanceId}}</td>
+        <td>{{instance.instanceId}}</td>
         <td>
-            <button class="btn btn-sm btn-warning" ng-click="restart(component.instance)">Restart</button>
-            <button class="btn btn-sm btn-danger" ng-click="shutdown(component.instance)">Shutdown</button>
+            <button class="btn btn-sm btn-warning" ng-click="restart(instance)">Restart</button>
+            <button class="btn btn-sm btn-danger" ng-click="shutdown(instance)">Shutdown</button>
         </td>
     </tr>
     </tbody>

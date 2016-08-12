@@ -1,5 +1,5 @@
 
-package com.aronim.cloud.component;
+package com.aronim.cloud.component.controller;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,14 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 @RestController
-public class ComponentServiceController {
-
+public class ComponentServiceController
+{
     @Autowired
     private RestTemplate restTemplate;
 
     @RequestMapping(value = "/api/components")
-    public Object registry() {
-
+    public Object registry()
+    {
         @SuppressWarnings("unchecked")
         Map<String, Map<String, ?>> applications = restTemplate.getForObject("http://localhost:8761/eureka/apps", Map.class);
 
@@ -31,24 +31,25 @@ public class ComponentServiceController {
     }
 
     @RequestMapping(value = "/api/components/restart", method = RequestMethod.POST)
-    public void restart(@RequestParam("hostname") String hostname, @RequestParam("port") String port) {
-
+    public void restart(@RequestParam("hostname") String hostname, @RequestParam("port") String port)
+    {
         String url = String.format("http://user:password@%s:%s/restart", hostname, port);
 
         post(url);
     }
 
     @RequestMapping(value = "/api/components/shutdown", method = RequestMethod.POST)
-    public void shutdown(@RequestParam("hostname") String hostname, @RequestParam("port") String port) {
-
+    public void shutdown(@RequestParam("hostname") String hostname, @RequestParam("port") String port)
+    {
         String url = String.format("http://user:password@%s:%s/shutdown", hostname, port);
 
         post(url);
     }
 
-    private void post(String url) {
-
-        HttpHeaders httpHeaders = new HttpHeaders() {{
+    private void post(String url)
+    {
+        HttpHeaders httpHeaders = new HttpHeaders()
+        {{
             String auth = "user:password";
             byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
             set("Authorization", "Basic " + new String(encodedAuth));

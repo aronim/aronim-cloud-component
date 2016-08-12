@@ -8,105 +8,102 @@
 
         function ($, angular, kdc, kdcComponentsTemplate) {
 
-            var module = angular.module("aronim.cloud.components", []);
+            angular.module("aronim.cloud.components", [])
+                .factory("acComponentsService", acComponentsService)
+                .directive("acComponents", acComponents);
 
-            module.factory("aronimCloudComponentsService",
-                function ($q, $http) {
+            function acComponentsService($q, $http) {
+                return {
+                    list: function () {
 
-                    return {
-                        list: function () {
+                        var deferred = $q.defer();
 
-                            var deferred = $q.defer();
+                        $http
+                            .get("/api/components")
+                            .success(function (data, status, headers, config) {
+                                deferred.resolve(data);
+                            })
+                            .error(function (data, status, headers, config) {
+                                deferred.reject(data.message);
+                            });
 
-                            $http
-                                .get("/api/components")
-                                .success(function (data, status, headers, config) {
-                                    deferred.resolve(data);
-                                })
-                                .error(function (data, status, headers, config) {
-                                    deferred.reject(data.message);
-                                });
+                        return deferred.promise;
+                    },
+                    restart: function (instance) {
 
-                            return deferred.promise;
-                        },
-                        restart: function (instance) {
+                        var deferred = $q.defer();
 
-                            var deferred = $q.defer();
+                        $http
+                            .post("/api/components/restart?hostname=" + instance.ipAddr + "&port=" + instance.port.$, {})
+                            .success(function (data, status, headers, config) {
+                                deferred.resolve(data);
+                            })
+                            .error(function (data, status, headers, config) {
+                                deferred.reject(data.message);
+                            });
 
-                            $http
-                                .post("/api/components/restart?hostname=" + instance.ipAddr + "&port=" + instance.port.$, {})
-                                .success(function (data, status, headers, config) {
-                                    deferred.resolve(data);
-                                })
-                                .error(function (data, status, headers, config) {
-                                    deferred.reject(data.message);
-                                });
+                        return deferred.promise;
+                    },
+                    shutdown: function (instance) {
 
-                            return deferred.promise;
-                        },
-                        shutdown: function (instance) {
+                        var deferred = $q.defer();
 
-                            var deferred = $q.defer();
+                        $http
+                            .post("/api/components/shutdown?hostname=" + instance.ipAddr + "&port=" + instance.port.$, {})
+                            .success(function (data, status, headers, config) {
+                                deferred.resolve(data);
+                            })
+                            .error(function (data, status, headers, config) {
+                                deferred.reject(data.message);
+                            });
 
-                            $http
-                                .post("/api/components/shutdown?hostname=" + instance.ipAddr + "&port=" + instance.port.$, {})
-                                .success(function (data, status, headers, config) {
-                                    deferred.resolve(data);
-                                })
-                                .error(function (data, status, headers, config) {
-                                    deferred.reject(data.message);
-                                });
-
-                            return deferred.promise;
-                        }
+                        return deferred.promise;
                     }
                 }
-            );
+            };
 
-            module.directive("aronimCloudComponents",
-                function ($window, $log, kdcComponentsService) {
+            function acComponents(acComponentsService) {
 
-                    return {
-                        restrict: "E",
-                        template: kdcComponentsTemplate,
-                        controller: function ($scope) {
+                return {
+                    restrict: "E",
+                    template: kdcComponentsTemplate,
+                    controller: function ($scope) {
 
-                            $scope.restart = function (instance) {
+                        $scope.restart = function (instance) {
 
-                                kdcComponentsService
-                                    .restart(instance)
-                                    .then(function () {
-                                        refreshComponents();
-                                    }, function () {
+                            acComponentsService
+                                .restart(instance)
+                                .then(function () {
+                                    refreshComponents();
+                                }, function () {
 
-                                    });
-                            };
+                                });
+                        };
 
-                            $scope.shutdown = function (instance) {
-                                kdcComponentsService
-                                    .shutdown(instance)
-                                    .then(function () {
-                                        refreshComponents();
-                                    }, function () {
+                        $scope.shutdown = function (instance) {
+                            acComponentsService
+                                .shutdown(instance)
+                                .then(function () {
+                                    refreshComponents();
+                                }, function () {
 
-                                    });
-                            };
+                                });
+                        };
 
-                            var refreshComponents = function () {
-                                kdcComponentsService
-                                    .list()
-                                    .then(function (components) {
-                                        $scope.components = components;
-                                    }, function (errorMessage) {
-                                        $scope.errorMessage = errorMessage;
-                                    });
-                            };
+                        var refreshComponents = function () {
+                            acComponentsService
+                                .list()
+                                .then(function (components) {
+                                    $scope.components = components;
+                                }, function (errorMessage) {
+                                    $scope.errorMessage = errorMessage;
+                                });
+                        };
 
-                            refreshComponents();
-                        }
+                        refreshComponents();
                     }
                 }
-            );
+            }
         }
     );
 }();

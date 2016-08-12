@@ -1,7 +1,7 @@
 info:
   app:
-    name: KdcCloudComponentService
-    description: KungfuDev Cloud Component Service
+    name: AronimCloudComponentService
+    description: Aronim Cloud Component Service
     version: 1.0-SNAPSHOT
 
 spring:
