@@ -17,7 +17,6 @@
     <orderEntry type="module" module-name="aronim-cloud-common" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:1.4.0.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.boot:spring-boot-starter-data-mongodb:1.4.0.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework.boot:spring-boot-starter-redis:1.4.0.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.cloud:spring-cloud-starter:1.1.0.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.cloud:spring-cloud-starter-eureka:1.1.0.RELEASE" level="project" />
@@ -206,5 +205,6 @@
     <orderEntry type="library" name="Gradle: org.webjars:requirejs-domready:2.0.1-2" level="project" />
     <orderEntry type="library" name="Gradle: org.webjars:requirejs-text:2.0.10-3" level="project" />
     <orderEntry type="library" name="Gradle: org.webjars:bootstrap:3.3.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-redis:1.4.0.RELEASE" level="project" />
   </component>
 </module>
